@@ -1,15 +1,8 @@
 Changes in this pull request:
 
-Release notes and core changes:
-^{
-  "releaseNotes": {
-    "id": "N/A",
-    "customerId": "N/A",
-    "issueDescription": null,
-    "changeDescription": null
-  },
-  "coreChanges": {
-    "issueDescription": null,
-    "changeDescription": null
-  }
-}^
+release{
+  "id": "N/A",
+  "external_id": "N/A",
+  "issue_description": null,
+  "change_description": null
+}release
