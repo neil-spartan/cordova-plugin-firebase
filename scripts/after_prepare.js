@@ -56,20 +56,16 @@ function updateStringsXml(contents) {
     var json = JSON.parse(contents);
     var strings = fs.readFileSync(PLATFORM.ANDROID.stringsXml).toString();
 
-    // strip non-default value
-    strings = strings.replace(new RegExp('<string name="google_app_id">([^\@<]+?)</string>', 'i'), '');
-
-    // strip non-default value
-    strings = strings.replace(new RegExp('<string name="google_api_key">([^\@<]+?)</string>', 'i'), '');
-
     // strip empty lines
     strings = strings.replace(new RegExp('(\r\n|\n|\r)[ \t]*(\r\n|\n|\r)', 'gm'), '$1');
 
-    // replace the default value
-    strings = strings.replace(new RegExp('<string name="google_app_id">([^<]+?)</string>', 'i'), '<string name="google_app_id">' + json.client[0].client_info.mobilesdk_app_id + '</string>');
-
-    // replace the default value
-    strings = strings.replace(new RegExp('<string name="google_api_key">([^<]+?)</string>', 'i'), '<string name="google_api_key">' + json.client[0].api_key[0].current_key + '</string>');
+    // after_prepare is run multiple times, and duplicate strings causes a build error
+    if (~strings.indexOf('google_app_id')) {
+      return;
+    }
+    
+    // insert values from json
+    strings = strings.replace('</resources>', '<string name="google_app_id">' + json.client[0].client_info.mobilesdk_app_id + '</string><string name="google_api_key">' + json.client[0].api_key[0].current_key + '</string></resources>');
 
     fs.writeFileSync(PLATFORM.ANDROID.stringsXml, strings);
 }
@@ -131,8 +127,8 @@ module.exports = function(context) {
   var platforms = context.opts.platforms;
   // Copy key files to their platform specific folders
   if (platforms.indexOf('ios') !== -1 && directoryExists(IOS_DIR)) {
-    console.log('Preparing Firebase on iOS');
-    copyKey(PLATFORM.IOS);
+    //console.log('Preparing Firebase on iOS');
+    //copyKey(PLATFORM.IOS);
   }
   if (platforms.indexOf('android') !== -1 && directoryExists(ANDROID_DIR)) {
     console.log('Preparing Firebase on Android');
