@@ -1,8 +1,28 @@
-Changes in this pull request:
+### Creator
+- [x] Fill this in
+- [x] With all the creation
+- [x] Steps we need
+- [ ] To declare a PR ready for approval
 
-release{
-  "id": "N/A",
-  "external_id": "N/A",
-  "issue_description": null,
-  "change_description": null
-}release
+### Reviewer
+- [x] Fill this in
+- [x] With all the review
+- [x] Steps we need
+- [ ] To approve a PR
+
+### Details
+```xml
+
+<Issue id="">
+</Issue>
+
+<Change id="">
+</Change>
+
+<CoreIssue>
+</CoreIssue>
+
+<CoreChange>
+</CoreChange>
+
+```
